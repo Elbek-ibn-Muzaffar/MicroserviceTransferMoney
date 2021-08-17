@@ -48,6 +48,13 @@ public class SenderResource {
         return ResponseEntity.ok(senderDto);
     }
 
+    @DeleteMapping("/deletteTransfer/{id}")
+    public ResponseEntity deletteTransfer(@PathVariable long id)
+    {
+        String response=senderService.deletteTransfer(id);
+        return ResponseEntity.ok(response);
+    }
+
 
 
 }
