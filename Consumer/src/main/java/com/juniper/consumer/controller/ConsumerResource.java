@@ -2,6 +2,8 @@ package com.juniper.consumer.controller;
 
 import com.juniper.consumer.payload.Responce.FromFinancier;
 import com.juniper.consumer.service.ConsumerService;
+import com.juniper.consumer.service.ConsumerService2;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,13 @@ import java.util.List;
 public class ConsumerResource {
 
     @Autowired
-    ConsumerService consumerService;
+    ConsumerService2 consumerService;
 
+    @ApiOperation("barcha o'tkazmalarni olib kelish")
     @GetMapping("/getAllMoneyFinancier")
     public List<FromFinancier> getAllMoney()
     {
-        return consumerService.getAllMoney();
+        return consumerService.getAllTransfer();
     }
 
 }

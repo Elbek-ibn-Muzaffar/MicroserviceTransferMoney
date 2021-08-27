@@ -48,11 +48,21 @@ public class SenderResource {
         return ResponseEntity.ok(senderDto);
     }
 
+    //Transferni o'chirish
     @DeleteMapping("/deletteTransfer/{id}")
     public ResponseEntity deletteTransfer(@PathVariable long id)
     {
         String response=senderService.deletteTransfer(id);
         return ResponseEntity.ok(response);
+    }
+
+    //Barcha jo'natilgan pullar miqdori
+    @ApiOperation("barcha jo'natilgan pullarni miqdorini chiqaradi")
+    @GetMapping("/getTotalSumm")
+    public ResponseEntity getTotalSumm()
+    {
+        BigDecimal Summ=senderService.getTotalMoney();
+        return ResponseEntity.ok(Summ);
     }
 
 

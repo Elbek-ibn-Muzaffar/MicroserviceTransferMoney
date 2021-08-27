@@ -67,4 +67,18 @@ public class SenderService {
         }
         return "o'chirildi";
     }
+
+    //get total money
+    public BigDecimal getTotalMoney()
+    {
+        BigDecimal Sum= new BigDecimal(0);
+        List<MoneySenderEntity> moneySenderEntities=senderRepo.findAll();
+        List<SenderDto> senderDtos=dtoConverter.entityToDtoMoney(moneySenderEntities);
+        for (int i=0;i<senderDtos.size();i++)
+        {
+            Sum.add(senderDtos.get(i).getAmount());
+        }
+
+        return Sum;
+    }
 }

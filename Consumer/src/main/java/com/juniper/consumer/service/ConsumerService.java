@@ -15,11 +15,13 @@ public class ConsumerService {
     @Autowired
     RestTemplate restTemplate;
 
+
+    // Financier app dan List da Barcha transferlarni olib keladi
     public List<FromFinancier> getAllMoney()
     {
         ResponseEntity<FromFinancier[]> response =
                 restTemplate.getForEntity(
-                        "http://financier-app/getAllTransfer",
+                        "http://financier-app/api/v1/sendMoney/getAllTransfer",
                         FromFinancier[].class);
         FromFinancier[] fromFinanciers = response.getBody();
         return Arrays.asList(fromFinanciers);
