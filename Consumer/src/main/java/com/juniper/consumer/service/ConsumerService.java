@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,13 @@ public class ConsumerService {
     public List<ConsumerDto> getAllCosts()
     {
         List<ConsumerEntity> consumerEntities=consumerRepo.findAll();
-        List<ConsumerDto> consumerDtos=converter.entityToDtoConsumer(consumerEntities);
+        List<ConsumerDto> consumerDtos=new ArrayList<>();
+
+        for (int i=0;i<consumerEntities.size();i++)
+        {
+            consumerDtos.add(converter.entityToConsumerDto(consumerEntities.get(i)));
+        }
+//        List<ConsumerDto> consumerDtos=converter.entityToDtoConsumer(consumerEntities);
         return consumerDtos;
 
     }

@@ -34,7 +34,8 @@ public class ConsumerResource {
     @GetMapping("/getAllCosts")
     public List<ConsumerDto> getAllCosts()
     {
-        return consumerService2.getAllCosts();
+        List<ConsumerDto> consumerDtos=consumerService2.getAllCosts();
+        return consumerDtos;
     }
 
 
