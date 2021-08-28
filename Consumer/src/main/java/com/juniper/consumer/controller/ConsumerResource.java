@@ -55,6 +55,21 @@ public class ConsumerResource {
         return ResponseEntity.ok(response);
     }
 
+    @ApiOperation("Jami harajat miqdorini chiqarish")
+    @GetMapping("/getTotalCost")
+    public ResponseEntity getTotalCosts()
+    {
+        return ResponseEntity.ok(consumerService2.getTotalCost());
+    }
+
+
+    @ApiOperation("Harajatni o'chirish")
+    @DeleteMapping("/deleteCost/{id}")
+    public ResponseEntity deleteCost(@PathVariable long id)
+    {
+        return ResponseEntity.ok(consumerService2.deleteCost(id));
+    }
+
 
 
 }

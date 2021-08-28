@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ConsumerService {
@@ -40,6 +37,7 @@ public class ConsumerService {
 //    }
 
 
+    //harajatni saqlash
     public ConsumerDto saveCost(ConsumerDto consumerDto)
     {
         ConsumerEntity consumerEntity= converter.dtoToConsumerEntity(consumerDto);
@@ -47,6 +45,7 @@ public class ConsumerService {
         return converter.entityToConsumerDto(consumerEntity);
     }
 
+    //harajatni yangilash
     public String updateCost(long id, BigDecimal amount)
     {
         Optional<ConsumerEntity> consumerEntity=consumerRepo.findById(id);
@@ -62,6 +61,8 @@ public class ConsumerService {
         return "O'zgartirildi";
     }
 
+
+    //hamma harajatlarni chiqarish
     public List<ConsumerDto> getAllCosts()
     {
         List<ConsumerEntity> consumerEntities=consumerRepo.findAll();
@@ -71,8 +72,36 @@ public class ConsumerService {
         {
             consumerDtos.add(converter.entityToConsumerDto(consumerEntities.get(i)));
         }
-//        List<ConsumerDto> consumerDtos=converter.entityToDtoConsumer(consumerEntities);
         return consumerDtos;
 
+    }
+
+
+    //Jami sarflangan harajatlar miqdorini chiqarish
+    public BigDecimal getTotalCost()
+    {
+        List<ConsumerEntity> consumerEntities=consumerRepo.findAll();
+
+        BigDecimal Sum=new BigDecimal(0);
+
+        for (int i=0;i<consumerEntities.size();i++)
+        {
+            Sum=Sum.add(consumerEntities.get(i).getAmount());
+        }
+        return Sum;
+
+
+    }
+
+    public String deleteCost(long id)
+    {
+        Optional<ConsumerEntity> consumerEntity=consumerRepo.findById(id);
+        if (consumerEntity.isPresent())
+        {
+            consumerRepo.deleteById(id);
+            return "O'chirildi";
+        }
+
+        return "O'chmadi";
     }
 }

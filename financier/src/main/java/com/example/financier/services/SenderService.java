@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,10 +74,16 @@ public class SenderService {
     {
         BigDecimal Sum= new BigDecimal(0);
         List<MoneySenderEntity> moneySenderEntities=senderRepo.findAll();
-        List<SenderDto> senderDtos=dtoConverter.entityToDtoMoney(moneySenderEntities);
+        List<SenderDto> senderDtos=new LinkedList<>();
+
+        for (int i=0;i<moneySenderEntities.size();i++)
+        {
+            senderDtos.add(dtoConverter.entityToDtoMoney1(moneySenderEntities.get(i)));
+        }
+
         for (int i=0;i<senderDtos.size();i++)
         {
-            Sum.add(senderDtos.get(i).getAmount());
+            Sum=Sum.add(senderDtos.get(i).getAmount());
         }
 
         return Sum;
