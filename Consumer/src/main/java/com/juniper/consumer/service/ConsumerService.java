@@ -2,6 +2,7 @@ package com.juniper.consumer.service;
 
 import com.juniper.consumer.converters.Converter;
 import com.juniper.consumer.domains.ConsumerEntity;
+import com.juniper.consumer.payload.Responce.AllCostsDto;
 import com.juniper.consumer.payload.Responce.FromFinancier;
 import com.juniper.consumer.payload.request.ConsumerDto;
 import com.juniper.consumer.repository.ConsumerRepo;
@@ -63,16 +64,16 @@ public class ConsumerService {
 
 
     //hamma harajatlarni chiqarish
-    public List<ConsumerDto> getAllCosts()
+    public List<AllCostsDto> getAllCosts()
     {
         List<ConsumerEntity> consumerEntities=consumerRepo.findAll();
-        List<ConsumerDto> consumerDtos=new ArrayList<>();
+        List<AllCostsDto> allCostsDtos=new ArrayList<>();
 
         for (int i=0;i<consumerEntities.size();i++)
         {
-            consumerDtos.add(converter.entityToConsumerDto(consumerEntities.get(i)));
+            allCostsDtos.add(converter.entityToAllCostsDto(consumerEntities.get(i)));
         }
-        return consumerDtos;
+        return allCostsDtos;
 
     }
 

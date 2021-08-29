@@ -1,5 +1,6 @@
 package com.juniper.consumer.controller;
 
+import com.juniper.consumer.payload.Responce.AllCostsDto;
 import com.juniper.consumer.payload.Responce.FromFinancier;
 import com.juniper.consumer.payload.request.ConsumerDto;
 import com.juniper.consumer.service.ConsumerService;
@@ -32,10 +33,10 @@ public class ConsumerResource {
 
     @ApiOperation("Barcha harajatlarni chiqarish")
     @GetMapping("/getAllCosts")
-    public List<ConsumerDto> getAllCosts()
+    public List<AllCostsDto> getAllCosts()
     {
-        List<ConsumerDto> consumerDtos=consumerService2.getAllCosts();
-        return consumerDtos;
+        List<AllCostsDto> allCostsDtos=consumerService2.getAllCosts();
+        return allCostsDtos;
     }
 
 

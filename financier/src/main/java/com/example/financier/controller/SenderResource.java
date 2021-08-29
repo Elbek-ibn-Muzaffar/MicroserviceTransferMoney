@@ -1,8 +1,10 @@
 package com.example.financier.controller;
 
 import com.example.financier.domains.MoneySenderEntity;
+import com.example.financier.payload.response.ConsumerDtos;
 import com.example.financier.payload.response.SenderDto;
 import com.example.financier.payload.request.SenderDtoReq;
+import com.example.financier.services.ConsumerServiceContract;
 import com.example.financier.services.SenderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class SenderResource {
 
     @Autowired
     private SenderService senderService;
+
+    @Autowired
+    private ConsumerServiceContract consumerServiceContract;
 
 
 
@@ -65,6 +70,13 @@ public class SenderResource {
         return ResponseEntity.ok(Summ);
     }
 
+    //Barcha harajatlarni chiqarish
+    @ApiOperation("Baarcha Harajatlarni chiqarish")
+    @GetMapping("/getAllCost")
+    public List<ConsumerDtos> getAllCost()
+    {
+        return consumerServiceContract.getAllCosts();
+    }
 
 
 }

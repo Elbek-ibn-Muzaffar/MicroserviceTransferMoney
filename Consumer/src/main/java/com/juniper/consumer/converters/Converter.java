@@ -1,6 +1,7 @@
 package com.juniper.consumer.converters;
 
 import com.juniper.consumer.domains.ConsumerEntity;
+import com.juniper.consumer.payload.Responce.AllCostsDto;
 import com.juniper.consumer.payload.request.ConsumerDto;
 import org.modelmapper.ModelMapper;
 
@@ -22,9 +23,10 @@ public class Converter {
         return consumerDto;
     }
 
-    public List<ConsumerDto> entityToDtoConsumer(List<ConsumerEntity> consumerEntities)
+    public AllCostsDto entityToAllCostsDto(ConsumerEntity consumerEntity)
     {
-        List<ConsumerDto> consumerDtos= (List<ConsumerDto>) modelMapper.map(consumerEntities,ConsumerDto.class);
-        return consumerDtos;
+        AllCostsDto allCostsDto=modelMapper.map(consumerEntity,AllCostsDto.class);
+        return allCostsDto;
     }
+
 }
